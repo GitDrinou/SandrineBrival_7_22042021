@@ -1,0 +1,18 @@
+.search {
+    height: 4.3rem;
+    border-radius: 0.3rem;
+    border: none;
+    background-color: $search-bg;
+}
+
+#searchInput {
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.fa-search {
+    font-size: 2rem; 
+    position: absolute;
+    right: 1.2rem;
+}

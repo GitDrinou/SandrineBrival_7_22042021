@@ -1,0 +1,16 @@
+{
+  "name": "livrables",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "sass": "sass --watch ./sass/main.scss:./css/style.css"
+  },
+  "author": "Sandrine BRIVAL",
+  "license": "ISC",
+  "dependencies": {
+    "bootstrap": "^4.6.0",
+    "bootstrap-select": "^1.13.18",
+    "mdb-ui-kit": "^3.5.0"
+  }
+}

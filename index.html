@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Les petits plats</title>
+     <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+    <header class="container">
+        <div class="row my-3">
+            <div class="col d-flex justify-content-center">
+                <img src="./images/logo.svg" alt="logo site Les petits plats" aria-label="Les petits plats">
+            </div>
+        </div>
+        <div class="row mb-3 d-flex flex-row py-3 justify-content-between search">
+            <div class="col">
+               <input class="form-control inputSearch" id="searchInput" type="text" placeholder="Rechercher un ingrédient, appareil, ustensiles ou une recette">               
+            </div>
+            <div class="col">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+        <div class="row ml-0 mb-3">
+            <div class="col">
+                [tag sélectionné]
+            </div>
+        </div>
+        <div class="row">
+            <div class="col form-group">
+                <button class="btn btn-primary mr-3 mb-3 py-4 px-3"> 
+                    <span>Ingredients</span>
+                    <span class="fas fa-chevron-down" id="ing-btn"></span>
+                </button>
+                <button class="btn btn-success mr-3 mb-3 py-4 px-3"> 
+                    <span>Appareil</span>
+                    <span class="fas fa-chevron-down" id="ing-btn"></span>
+                </button>
+                <button class="btn btn-danger mr-3 mb-3 py-4 px-3"> 
+                    <span>Ustensile</span>
+                    <span class="fas fa-chevron-down" id="ing-btn"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <div class="row listRecipes">
+        </div>
+    </main>
+    
+    <script src="https://kit.fontawesome.com/25333533ea.js" crossorigin="anonymous"></script>
+    <!-- For Bootstrap framework -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>  
+    
+    <script src="./js/recipes.js"></script>
+    <script src="./js/search.js"></script>
+</body>
+</html>
