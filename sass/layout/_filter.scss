@@ -11,5 +11,19 @@
 .fa-chevron-down {
         position: absolute;
         right: 1rem;
-        top: 2rem;
+        top: 1.7rem;
+}
+
+.searchFilter {
+        background-color: transparent;
+        outline: none;
+        border: none;
+        color: white;
+        font-weight: 700;
+        font-size: 1.125rem;
+        padding-left: 0;
+        &:focus {
+                @extend .searchFilter;
+        }
+       
 }
