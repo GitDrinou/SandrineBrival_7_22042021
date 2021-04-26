@@ -1,3 +1,6 @@
+main {
+    position: relative;
+}
 .row, 
 .col {
     margin-left: 0;
@@ -89,5 +92,11 @@
     font-weight: 400;
     padding-right: 1rem;
     text-align: justify;
+
+}
+
+.listRecipes {
+    position: absolute;
+    top: 6rem;
 
 }

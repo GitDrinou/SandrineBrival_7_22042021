@@ -28,24 +28,37 @@
                 [tag sélectionné]
             </div>
         </div>
+        
+    </header>
+    <main class="container">
         <div class="row">
-            <div class="col form-group">
-                <button class="btn btn-primary mr-3 mb-3 py-3 px-3"> 
-                    <input class="form-control searchFilter" id="searchIng" type="text" value="Ingredients">
-                    <span class="fas fa-chevron-down" id="ing-btn"></span>
-                </button>
-                <button class="btn btn-success mr-3 mb-3 py-3 px-3"> 
+            <div class="col form-group filterBtn">
+                <button class="btn btn-primary mr-3 mb-3 py-3 px-3" id="btnIng"> 
+                    <input class="form-control searchFilter" id="searchIng" type="search" value="Ingredients">
+                    <span class="fas fa-chevron-down" id="ing-btnDown"></span>
+                    <span class="fas fa-chevron-up" id="ing-btnUp"></span>
+                    <div class="b-SearchIng">
+                        <div class="ingList"></div>
+                    </div>                    
+                </button>                
+                <button class="btn btn-success mr-3 mb-3 py-3 px-3" id="btnApp"> 
                     <input class="form-control searchFilter" id="searchApp" type="text" value="Appareil">
-                    <span class="fas fa-chevron-down" id="ing-btn"></span>
+                    <span class="fas fa-chevron-down" id="app-btnDown"></span>
+                    <span class="fas fa-chevron-down" id="app-btnUp"></span>
+                    <div class="b-SearchApp">
+                        <div class="appList"></div>
+                    </div>  
                 </button>
-                <button class="btn btn-danger mr-3 mb-3 py-3 px-3"> 
+                <button class="btn btn-danger mr-3 mb-3 py-3 px-3" id="btnUst"> 
                     <input class="form-control searchFilter" id="searchUst" type="text" value="Ustensile">
-                    <span class="fas fa-chevron-down" id="ing-btn"></span>
+                    <span class="fas fa-chevron-down" id="ust-btnDown"></span>
+                    <span class="fas fa-chevron-down" id="ust-btnUp"></span>
+                    <div class="b-SearchUst">
+                        <div class="ustList"></div>
+                    </div>  
                 </button>
             </div>
         </div>
-    </header>
-    <main class="container">
         <div class="row listRecipes">
         </div>
     </main>

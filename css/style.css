@@ -1,5 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Lato&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+main {
+  position: relative;
+}
+
 .row,
 .col {
   margin-left: 0;
@@ -93,6 +97,11 @@
   text-align: justify;
 }
 
+.listRecipes {
+  position: absolute;
+  top: 6rem;
+}
+
 body {
   font-family: "Lato", Arial, Helvetica, sans-serif;
 }
@@ -116,30 +125,60 @@ body {
   right: 1.2rem;
 }
 
-.btn {
+.filterBtn {
+  z-index: 1;
+}
+
+.btn-primary, .btn-success, .btn-danger {
+  float: left;
+  position: relative;
   width: 10.625rem;
   font-weight: 700;
   font-size: 1.125rem;
   outline: none;
   border: none;
   text-align: left;
-  position: relative;
 }
 
-.fa-chevron-down {
+.fa-chevron-down, .fa-chevron-up {
   position: absolute;
   right: 1rem;
   top: 1.7rem;
+}
+
+#ing-btnUp, #app-btnUp, #ust-btnUp {
+  display: none;
+}
+
+#ing-btnDown, #app-btnDown, #ust-btnDown {
+  display: block;
 }
 
 .searchFilter, .searchFilter:focus {
   background-color: transparent;
   outline: none;
   border: none;
-  color: white;
+  color: #FFFF;
   font-weight: 700;
   font-size: 1.125rem;
   padding-left: 0;
+  overflow: auto;
+}
+.b-SearchIng, .b-SearchApp, .b-SearchUst {
+  display: none;
+}
+
+.ingList, .appList, .ustList {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  overflow: hidden;
+  background-color: transparent;
+  height: 300px;
+}
+.ingList > span, .appList > span, .ustList > span {
+  font-weight: 400;
+  font-size: 1.125rem;
+  line-height: 1.35rem;
 }
 
 /*# sourceMappingURL=style.css.map */

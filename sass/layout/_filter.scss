@@ -1,29 +1,59 @@
-.btn {       
+.filterBtn {
+        z-index: 1;
+}
+
+.btn-primary, .btn-success, .btn-danger {
+        float: left;
+        position: relative;
         width: 10.625rem;
         font-weight: 700;
         font-size: 1.125rem;
         outline: none;
         border: none;
         text-align: left;
-        position: relative;
 }
 
-.fa-chevron-down {
+.fa-chevron-down, .fa-chevron-up {
         position: absolute;
         right: 1rem;
         top: 1.7rem;
+}
+
+#ing-btnUp, #app-btnUp, #ust-btnUp {
+        display: none;
+}
+
+#ing-btnDown, #app-btnDown, #ust-btnDown {
+        display: block;
 }
 
 .searchFilter {
         background-color: transparent;
         outline: none;
         border: none;
-        color: white;
+        color: #FFFF;
         font-weight: 700;
         font-size: 1.125rem;
         padding-left: 0;
+        overflow: auto;
         &:focus {
                 @extend .searchFilter;
+        }       
+}
+
+.b-SearchIng, .b-SearchApp, .b-SearchUst {
+        display: none;
+}
+
+.ingList, .appList, .ustList {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        overflow: hidden;
+        background-color: transparent;
+        height: 300px;
+        & > span {
+                font-weight: 400;
+                font-size: 1.125rem;
+                line-height: 1.35rem;
         }
-       
 }
