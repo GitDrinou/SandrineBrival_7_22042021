@@ -1,23 +1,15 @@
 
-const searchIng = document.getElementById("searchIng");
-const ingBtnDown = document.getElementById("ing-btnDown");
-const ingBtnUp = document.getElementById("ing-btnUp");
-const appBtnDown = document.getElementById("app-btnDown");
-const appBtnUp = document.getElementById("app-btnUp");
-const ustBtnDown = document.getElementById("ust-btnDown");
-const ustBtnUp = document.getElementById("ust-btnUp");
-const blistIng = document.querySelector(".b-SearchIng");
-const blistApp = document.querySelector(".b-SearchApp");
-const blistUst = document.querySelector(".b-SearchUst");
-const listIng = document.querySelector(".ingList");
-const listApp = document.querySelector(".appList");
-const listUst = document.querySelector(".ustList");
-const btnIng = document.querySelector(".btn-primary");
-const btnFilter = document.querySelectorAll(".btn");
-
 let searchIngArray = [... new Set(ingArray)];
 let searchAppArray = [... new Set(appArray)];
 let searchUstArray = [... new Set(ustArray)];
+
+let maxIng = 0;
+let maxApp = 0;
+let maxUst = 0;
+
+searchIngArray.length >= 30 ? maxIng = 30 : maxIng = searchIngArray.length;
+searchAppArray.length >= 30 ? maxApp = 30 : maxApp = searchAppArray.length;
+searchUstArray.length >= 30 ? maxUst = 30 : maxUst = searchUstArray.length;
 
 // Première lettre en majuscule
 String.prototype.capitalize = function() {
@@ -27,72 +19,14 @@ String.prototype.capitalize = function() {
 btnFilter.forEach((btn) => { 
     switch(btn.getAttribute("id")) {
         case "btnIng":
-            ingBtnDown.addEventListener("click", () => {
-                let ctnIng = 0;
-                blistIng.style.display = "block";
-                searchIng.value="";
-                searchIng.setAttribute("placeholder", "Recherche un ingredient");
-                btnIng.style =" width:600px";
-                ingBtnDown.style.display ="none";
-                ingBtnUp.style.display = "block";
-                for (let ing of searchIngArray) {
-                    ctnIng < 30 ? listIng.innerHTML += `<span> ${ing.capitalize()} </span>` : null ;
-                    ctnIng ++;        
-                }
-            });
-            
-            ingBtnUp.addEventListener("click", () => {
-                blistIng.style.display = "none";
-                searchIng.value !="" ? searchIng.value = searchIng.value : searchIng.value = "Ingredient" ;
-                btn.style ="width:10.625rem";
-                ingBtnDown.style.display ="block";
-                ingBtnUp.style.display = "none";
-            });
+            displayList("Ing","ingredient",searchIngArray);
+            break;
         case "btnApp":
-            appBtnDown.addEventListener("click", () => {
-                let ctnApp = 0;
-                blistApp.style.display = "block";
-                searchApp.value="";
-                searchApp.setAttribute("placeholder", "Recherche un appareil");
-                btnApp.style =" width:600px";
-                appBtnDown.style.display ="none";
-                appBtnUp.style.display = "block";
-                for (let app of searchAppArray) {
-                    ctnApp < 30 ? listApp.innerHTML += `<span> ${app.capitalize()} </span>` : null ;
-                    ctnApp ++;  
-                    console.log(app);      
-                }
-            });
-            
-            appBtnUp.addEventListener("click", () => {
-                blistApp.style.display = "none";
-                searchApp.value !="" ? searchApp.value = searchApp.value : searchApp.value = "Appareil" ;
-                btn.style ="width:10.625rem";
-                appBtnDown.style.display ="block";
-                appBtnUp.style.display = "none";
-            });
+            displayList("App","appareil",searchAppArray);
+            break;
         case "btnUst":
-            ustBtnDown.addEventListener("click", () => {
-                let ctnUst = 0;
-                blistUst.style.display = "block";
-                searchUst.value="";
-                searchUst.setAttribute("placeholder", "Recherche un ustensile");
-                btnUst.style =" width:600px";
-                ustBtnDown.style.display ="none";
-                ustBtnUp.style.display = "block";
-                for (let ust of searchUstArray) {
-                    ctnUst < 30 ? listUst.innerHTML += `<span> ${ust.capitalize()} </span>` : null ;
-                    ctnUst ++;        
-                }
-            });
-            
-            ustBtnUp.addEventListener("click", () => {
-                blistUst.style.display = "none";
-                searchUst.value !="" ? searchUst.value = searchUst.value : searchUst.value = "Ustensile" ;
-                btnUst.style ="width:10.625rem";
-                ustBtnDown.style.display ="block";
-                ustBtnUp.style.display = "none";
-            });
+            displayList("Ust","ustensile",searchUstArray);
+            break;
     }
 });
 
@@ -102,5 +36,50 @@ searchIng.addEventListener("focus", () => {
     searchIng.value=" ";
 });
 
-// onClick ingredient chevron
+/**
+ * FUNCTION
+ * Display a list of item according the type of filter
+ * @param {*} type 
+ * @param {*} label 
+ * @param {*} array 
+ * 
+ */
+
+function displayList(type, label, array) {
+    let counter = 0;
+    let maxCount = 0;
+
+    array.length > 30 ? maxCount = 30 : maxCount = array.length;
+
+    const btn = document.getElementById("btn" + type);
+    const btnDown = document.getElementById("btnDown" + type);
+    const btnUp = document.getElementById("btnUp" + type);
+    const search = document.querySelector(".b-Search" + type);
+    const searchText = document.getElementById("search" + type);
+    const listItem = document.querySelector(".list" + type);
+    
+    btnDown.addEventListener("click", () => {
+        search.style.display = "block";
+        searchText.value="";
+        btn.style ="width:600px";
+        searchText.setAttribute("placeholder", "Recherche un " + label);
+        btnDown.style.display ="none";
+        btnUp.style.display = "block";
+
+        for (let item of array) {
+            if (counter < maxCount) { 
+                listItem.innerHTML += `<span> ${item.capitalize()} </span>`;
+                counter ++; 
+            }                                       
+        }
+    });
+
+    btnUp.addEventListener("click", () => {
+        search.style.display = "none";
+        searchText.value !="" ? searchText.value = searchText.value : searchText.value = label ;
+        btn.style ="width:10.625rem";
+        btnDown.style.display ="block";
+        btnUp.style.display = "none";
+    });
+}
 

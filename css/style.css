@@ -146,11 +146,11 @@ body {
   top: 1.7rem;
 }
 
-#ing-btnUp, #app-btnUp, #ust-btnUp {
+#btnUpIng, #btnUpApp, #btnUpUst {
   display: none;
 }
 
-#ing-btnDown, #app-btnDown, #ust-btnDown {
+#btnDownIng, #btnDownApp, #btnDownUst {
   display: block;
 }
 
@@ -168,14 +168,17 @@ body {
   display: none;
 }
 
-.ingList, .appList, .ustList {
+.listIng, .listApp, .listUst {
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr auto;
+  grid-gap: 0.8rem;
   overflow: hidden;
   background-color: transparent;
-  height: 300px;
+  min-height: max-content;
+  max-height: 300px;
 }
-.ingList > span, .appList > span, .ustList > span {
+.listIng > span, .listApp > span, .listUst > span {
   font-weight: 400;
   font-size: 1.125rem;
   line-height: 1.35rem;
