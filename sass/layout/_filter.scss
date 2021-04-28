@@ -38,7 +38,13 @@
         overflow: auto;
         &:focus {
                 @extend .searchFilter;
-        }       
+        }          
+}
+
+#searchIng::placeholder,#searchApp::placeholder,#searchUst::placeholder {
+        color: rgba(255,255,255,0.5);
+        font-weight: 700;
+        font-size: 1.125rem;
 }
 
 .b-SearchIng, .b-SearchApp, .b-SearchUst {
@@ -59,4 +65,39 @@
                 font-size: 1.125rem;
                 line-height: 1.35rem;
         }
+}
+
+
+
+.tagSelected {
+        display: block;
+        max-width: max-content;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 0.5rem;
+        line-height: 1rem;
+        font-size: 0.875rem;
+        font-weight: 700;
+        border-radius: 5px;
+        color: #FFF;
+        & .fa-times-circle {
+                font-size: 1.25rem;
+                padding-left: 1rem;
+                margin-top: -0.2rem;
+                
+        }
+}
+
+.color-ing {
+        background-color: $col-boot-primary;
+}
+
+.color-app {
+        background-color: $col-boot-success;
+}
+
+
+.color-ust {
+        background-color: $col-boot-danger;
 }

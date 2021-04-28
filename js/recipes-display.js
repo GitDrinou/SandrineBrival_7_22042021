@@ -1,5 +1,5 @@
 
-//console.log(recipes);
+
 const ingArray = [];
 const appArray = [];
 const ustArray = [];
@@ -24,7 +24,7 @@ for(let recipe of recipes) {
         ustArray.push((ust).toLowerCase());
     }   
 
-    document.querySelector(".listRecipes").innerHTML += `<div class="col-12 col-md-6 col-lg-4 mb-5 border-light">
+    document.getElementById("listRecipes").innerHTML += `<div class="col-12 col-md-6 col-lg-4 mb-5 border-light">
                                                             <div class="card">
                                                                 <img class="card-img-top" src="images/img.png" alt="vignette recette">
                                                                 <div class="card-body px-0 py-0">
@@ -33,7 +33,7 @@ for(let recipe of recipes) {
                                                                         <span class="card-text rTime"> <i class="far fa-clock"></i> ${recipe.time} min</span>
                                                                     </div>
                                                                     <div class="card-content pb-3 mb-3">
-                                                                        <div class="card-text listIng"> ${textIng}</div>
+                                                                        <div class="card-text ingList"> ${textIng}</div>
                                                                         <p class="card-text descRecipe"> ${recipeDesc}...</p>
                                                                     </div>
                                                                 </div>

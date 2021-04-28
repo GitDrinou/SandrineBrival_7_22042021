@@ -72,10 +72,10 @@ main {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  min-height: 180px;
+  min-height: 175px;
 }
 
-.listIng {
+.ingList {
   width: 50%;
   font-size: 0.75rem;
   font-weight: 700;
@@ -83,7 +83,7 @@ main {
   display: flex;
   flex-direction: column;
 }
-.listIng > span {
+.ingList > span {
   padding-left: 1rem;
 }
 
@@ -164,6 +164,12 @@ body {
   padding-left: 0;
   overflow: auto;
 }
+#searchIng::placeholder, #searchApp::placeholder, #searchUst::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 700;
+  font-size: 1.125rem;
+}
+
 .b-SearchIng, .b-SearchApp, .b-SearchUst {
   display: none;
 }
@@ -182,6 +188,37 @@ body {
   font-weight: 400;
   font-size: 1.125rem;
   line-height: 1.35rem;
+}
+
+.tagSelected {
+  display: block;
+  max-width: max-content;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  line-height: 1rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  border-radius: 5px;
+  color: #FFF;
+}
+.tagSelected .fa-times-circle {
+  font-size: 1.25rem;
+  padding-left: 1rem;
+  margin-top: -0.2rem;
+}
+
+.color-ing {
+  background-color: #0074F0;
+}
+
+.color-app {
+  background-color: #28A745;
+}
+
+.color-ust {
+  background-color: #DC3545;
 }
 
 /*# sourceMappingURL=style.css.map */
