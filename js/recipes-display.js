@@ -1,9 +1,4 @@
 
-
-const ingArray = [];
-const appArray = [];
-const ustArray = [];
-
 for(let recipe of recipes) {
     let recipeIng = recipe.ingredients;
     let recipeUst = recipe.ustensils;
@@ -24,7 +19,7 @@ for(let recipe of recipes) {
         ustArray.push((ust).toLowerCase());
     }   
 
-    document.getElementById("listRecipes").innerHTML += `<div class="col-12 col-md-6 col-lg-4 mb-5 border-light">
+    document.getElementById("listRecipes").innerHTML += `<div class="col-12 col-md-6 col-lg-4 mb-5 border-light js-recipe">
                                                             <div class="card">
                                                                 <img class="card-img-top" src="images/img.png" alt="vignette recette">
                                                                 <div class="card-body px-0 py-0">
@@ -39,18 +34,6 @@ for(let recipe of recipes) {
                                                                 </div>
                                                             </div>
                                                         </div>`
-
-    /**<div class="col-12 col-lg-4">
-                <div class="card mb-4 mb-lg-0 border-light shadow-sm">
-                    <img class="card-img-top" src="images/course/css.jpeg" alt="Animations CSS">
-                    <div class="card-body">
-                        <h5 class="card-title">Créez des animations CSS</h5>
-                        <p class="card-text">Vous allez plonger dans le monde des animations CSS pour donner vie à vos pages web !</p>
-                        <a href="lessons_1.html" class="btn btn-primary stretched-link" role="button">Démarrer l'apprentissage</a>
-                    </div>
-                </div>
-            </div>
-    console.log(item.name);*/
 }
 
 

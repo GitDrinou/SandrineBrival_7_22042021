@@ -1,2 +1,4 @@
 
-const btnFilter = document.querySelectorAll(".btn");
+const ingArray = [];
+const appArray = [];
+const ustArray = [];

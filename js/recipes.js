@@ -83,7 +83,7 @@ const recipes = [
               "unit" : "ml"
           },
           {
-              "ingredient": "Coulis de tomate",
+              "ingredient": "Coulis de tomates",
               "quantity" : 25,
               "unit" : "cl"
           },
@@ -100,7 +100,7 @@ const recipes = [
           }
       ],
       "time": 80,
-      "description": "Découper le poulet en morceaux, les faire dorer dans une cocotte avec de l'huile d'olive. Salez et poivrez. Une fois doré, laisser cuire en ajoutant de l'eau. Au bout de 30 minutes, ajouter le coulis de tomate, le lait de coco ainsi que le poivron et l'oignon découpés en morceaux. Laisser cuisiner 30 minutes de plus. Servir avec du riz",
+      "description": "Découper le poulet en morceaux, les faire dorer dans une cocotte avec de l'huile d'olive. Salez et poivrez. Une fois doré, laisser cuire en ajoutant de l'eau. Au bout de 30 minutes, ajouter le coulis de tomates, le lait de coco ainsi que le poivron et l'oignon découpés en morceaux. Laisser cuisiner 30 minutes de plus. Servir avec du riz",
       "appliance": "Cocotte",
       "ustensils": ["couteau"]
   },{
@@ -718,7 +718,7 @@ const recipes = [
               "quantity": 2
           },
           {
-              "ingredient": "Coulis de tomate",
+              "ingredient": "Coulis de tomates",
               "quantity": 300,
               "unit":"g"
           },
@@ -740,7 +740,7 @@ const recipes = [
       ],
       "time": 30,
       "description":"Cuisiner la viande hachée dans une poelle à frire. Dans une autre faire cuire les oignons découpés en fins dés avec un peu de beurre. Ajouter du vin rouge. Mélanger les oigons avec la viande hachée. Faire cuire les pates le temps indiqué sur le paquet. Ajouter le coulis de tomates à la viande hachée. Une fois que les pates sont cuites, ajouter la crème fraiche à la viande hachée. Serivir.",
-      "appliance": "casserole.",
+      "appliance": "Casserole",
       "ustensils":["Cuillère en bois", "louche", "couteau"]
   },
   {
