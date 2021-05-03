@@ -57,6 +57,8 @@ class TagList {
             }
         });
     }    
+
+    // ICI gérer le cas où les résultats sont vides
         
     }
 }
