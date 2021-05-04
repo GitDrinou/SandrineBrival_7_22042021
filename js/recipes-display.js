@@ -1,3 +1,6 @@
+const ingArray = [];
+const appArray = [];
+const ustArray = [];
 
 for(let recipe of recipes) {
     let recipeIng = recipe.ingredients;
@@ -30,6 +33,12 @@ for(let recipe of recipes) {
                                                                     <div class="card-content pb-3 mb-3">
                                                                         <div class="card-text ingList"> ${textIng}</div>
                                                                         <p class="card-text descRecipe"> ${recipeDesc}...</p>
+                                                                    </div>
+                                                                    <div class="card-details pb-3 mb-3">
+                                                                        <p class="card-text">
+                                                                            Appareil : ${recipe.appliance} <br>
+                                                                            Ustensiles : ${recipe.ustensils}
+                                                                        </p>
                                                                     </div>
                                                                 </div>
                                                             </div>

@@ -103,6 +103,11 @@ main {
   top: 6rem;
 }
 
+.card-details {
+  visibility: hidden;
+  font-size: 0.75rem;
+}
+
 body {
   font-family: "Lato", Arial, Helvetica, sans-serif;
 }

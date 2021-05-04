@@ -1,10 +1,76 @@
 class TagList {
-    constructor(type, tag) {
+    constructor(type, tag, label, array) {
         this.type = type,
-        this.tag = tag
+        this.tag = tag,
+        this.label = label,
+        this.array = array
     }
 
-    getRender() {
+    get_Render() {
+        let counter = 0;
+        let maxCount = 0;
+        let arr = this.array;
+            
+        arr.length > 30 ? maxCount = 30 : maxCount = arr.length;
+    
+        const btn = document.getElementById("btn" + this.type);
+        const btnDown = document.getElementById("btnDown" + this.type);
+        const btnUp = document.getElementById("btnUp" + this.type);
+        const search = document.querySelector(".b-Search" + this.type);
+        const searchText = document.getElementById("search" + this.type);
+        const listItem = document.querySelector(".list" + this.type);
+    
+        // focus Ingredients search
+        // value replace by null
+        searchText.addEventListener("focus", () => {
+            searchText.value=" ";
+        });
+        
+        btnDown.addEventListener("click", () => {
+            search.style.display = "block";
+            searchText.value="";
+            btn.style ="width:600px";
+            searchText.setAttribute("placeholder", "Recherche un " + this.label);
+            btnDown.style.display ="none";
+            btnUp.style.display = "block";
+    
+            for (let item of this.array) {
+                if (counter < maxCount) { 
+                    listItem.innerHTML += `<span data-value="${item.capitalize()}" data-type="${this.type}" onClick="selectedTag(this.dataset.type,this.dataset.value)">${item.capitalize()}</span>`;
+                    counter ++; 
+                }                                       
+            }
+        });
+    
+        btnUp.addEventListener("click", () => {
+            search.style.display = "none";
+            searchText.value !="" ? searchText.value = searchText.value : searchText.value = this.label ;
+            btn.style ="width:10.625rem";
+            btnDown.style.display ="block";
+            btnUp.style.display = "none";
+        });
+    
+        
+        /**
+         * ALGORITHME #01
+         * Tag list filters
+         * manual search
+        */
+        let arrFilter= [];
+    
+        searchText.addEventListener("input", () => {
+            let valSearch = searchText.value;
+            arrFilter = array.filter(elt => elt.includes(valSearch.replace(/ /g, "")));
+            listItem.innerHTML = "";
+            search.style.display ="block";
+            btn.style="width:600px";
+            for (let item of arrFilter) {
+                listItem.innerHTML += `<span data-value="${item.capitalize()}" data-type="${this.type}" onClick="selectedTag(this.dataset.type,this.dataset.value)">${item.capitalize()}</span>`;
+            }      
+        });
+    }
+   
+    get_Selected() {
         let tagSelected =  document.getElementById("tag");
         let btnLabel;
 
@@ -34,31 +100,19 @@ class TagList {
         document.getElementById("btnUp" + this.type).style.display = "none"; 
         
         
-    const list = document.querySelectorAll(".js-recipe");
-    let valTag = document.getElementById("tag").textContent;  
-    let closeTag = document.querySelector(".fa-times-circle");
+        let valTag = document.getElementById("tag").textContent;  
+        let closeTag = document.querySelector(".fa-times-circle");
 
-    closeTag.addEventListener("click", () => {
-        tagSelected.style.display = "none";
-        list.forEach(elt => {
-            elt.style.display = "block";
+        closeTag.addEventListener("click", () => {
+            tagSelected.style.display = "none";
+            list.forEach(elt => {
+                elt.style.display = "block";
+            });
+
         });
 
-    });
-
-    if (valTag !="") {        
-        list.forEach(elt => {
-            let recipeCard = elt.textContent.toLowerCase();
-            if (recipeCard.indexOf(valTag.toLowerCase()) > -1) {
-                elt.style.display="block";
-            }
-            else {
-                elt.style.display = "none";
-            }
-        });
-    }    
-
-    // ICI gérer le cas où les résultats sont vides
-        
+        if (valTag !="") {   
+            filterRecipes(valTag);
+        }         
     }
 }
