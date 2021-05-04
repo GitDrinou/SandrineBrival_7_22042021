@@ -11,22 +11,17 @@ String.prototype.capitalize = function() {
 btnFilter.forEach((btn) => { 
     switch(btn.getAttribute("id")) {
         case "btnIng":
-            displayList("Ing","ingredient",searchIngArray);
+            const listIng = new TagList("Ing","","ingredient", searchIngArray).get_Render();
             break;
         case "btnApp":
-            displayList("App","appareil",searchAppArray);
+            const listApp = new TagList("App","","appareil", searchAppArray).get_Render();
             break;
         case "btnUst":
-            displayList("Ust","ustensile",searchUstArray);
+            const listUst = new TagList("Ust","","ustensile", searchUstArray).get_Render();
             break;
     }
 });
 
-// focus Ingredients search
-// value replace by null
-searchIng.addEventListener("focus", () => {
-    searchIng.value=" ";
-});
 
 
 /**
