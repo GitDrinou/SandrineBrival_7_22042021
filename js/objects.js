@@ -57,22 +57,26 @@ class TagList {
          * Use condition if 
         */
         let arrFilter= [];
-    
+        
         searchText.addEventListener("input", () => {
-            let valSearch = searchText.value;
+            let valSearch = searchText.value;            
             valSearch = valSearch.replace(/ /g, "");
-            if (valSearch.length > 3) {
+            if (valSearch.length > 2) {
                 for(let ing of this.array) {
                     if (ing.indexOf(valSearch)>-1) {
                         arrFilter.push(ing);
                     }
                 }
             }
+            else if(valSearch.length === 0) {
+                arrFilter.splice(0, arrFilter.length);
+            }
 
             listItem.innerHTML = "";
             search.style.display ="block";
             btn.style="width:600px";
-            for (let item of arrFilter) {
+            let newArrFilter = [... new Set(arrFilter)];
+            for (let item of newArrFilter) {
                 listItem.innerHTML += `<span data-value="${item.capitalize()}" data-type="${this.type}" onClick="selectedTag(this.dataset.type,this.dataset.value)">${item.capitalize()}</span>`;
             }     
         });
