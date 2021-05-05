@@ -102,6 +102,11 @@ main {
   top: 6rem;
 }
 
+.card-details {
+  visibility: hidden;
+  font-size: 0.75rem;
+}
+
 body {
   font-family: "Lato", Arial, Helvetica, sans-serif;
 }
@@ -209,15 +214,15 @@ body {
   margin-top: -0.2rem;
 }
 
-.color-ing {
+.colorIng {
   background-color: #0074F0;
 }
 
-.color-app {
+.colorApp {
   background-color: #28A745;
 }
 
-.color-ust {
+.colorUst {
   background-color: #DC3545;
 }
 

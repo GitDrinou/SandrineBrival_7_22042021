@@ -1,3 +1,12 @@
+const btnFilter = document.querySelectorAll(".btn");
+const mainSearch = document.getElementById("searchInput");
+const icoSearch = document.getElementById("icoSearch");
+const list = document.querySelectorAll(".js-recipe");
+
+
+let counter = 0;
+let maxCount = 0;
+
 
 let searchIngArray = [... new Set(ingArray)];
 let searchAppArray = [... new Set(appArray)];
@@ -11,21 +20,25 @@ String.prototype.capitalize = function() {
 btnFilter.forEach((btn) => { 
     switch(btn.getAttribute("id")) {
         case "btnIng":
-            const listIng = new TagList("Ing","","ingredient", searchIngArray).get_Render();
+            const listIng = new TagList("Ing","","ingredient",searchIngArray).get_Render();
             break;
         case "btnApp":
-            const listApp = new TagList("App","","appareil", searchAppArray).get_Render();
+            const listApp = new TagList("App","","appareil",searchAppArray).get_Render();
             break;
         case "btnUst":
-            const listUst = new TagList("Ust","","ustensile", searchUstArray).get_Render();
+            const listUst = new TagList("Ust","","ustensile",searchUstArray).get_Render();
             break;
     }
 });
 
 
-
-
-function selectedTag(type,tag) {    
-    const tagged = new TagList(type,tag).get_Selected();
+function selectedTag(type,tag) {
+    const tagged = new TagList(type,tag).get_Selected();    
 }
 
+
+
+icoSearch.addEventListener("click", () => {
+    filterRecipes(mainSearch.value);
+    
+});

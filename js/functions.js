@@ -5,7 +5,7 @@ function filterRecipes(val) {
         // DOM Content verification
         let recipeCard = elt.textContent.toLowerCase();                
         if (recipeCard.indexOf(val) > -1) {
-            console.log(recipeCard);
+            //console.log(recipeCard);
             elt.style.display="block";
         }
         else {
