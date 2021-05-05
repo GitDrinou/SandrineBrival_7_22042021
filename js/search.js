@@ -38,7 +38,7 @@ function selectedTag(type,tag) {
 
 
 
-icoSearch.addEventListener("click", () => {
+/*icoSearch.addEventListener("click", () => {
     filterRecipes(mainSearch.value);
     
-});
+});*/

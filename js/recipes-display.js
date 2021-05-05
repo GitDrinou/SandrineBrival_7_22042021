@@ -2,6 +2,37 @@ const ingArray = [];
 const appArray = [];
 const ustArray = [];
 
+let recipesByIng = [];
+let recipesByUst = [];
+let recipesByOther = [];
+
+const defaultRecipes = new Recipe(recipes).get_Render();
+
+// fill arrays recipesBy..
+for (let rec of recipes) {
+      
+    for (let ust of rec.ustensils) {
+        recipesByUst.push({
+            "recipeId" : rec.id,
+            "ustensil" : ust 
+        })
+    }
+
+    recipesByOther.push({
+        "recipeId" : rec.id,
+        "appliance": rec.appliance.toLowerCase(),
+        "description" : rec.description.toLowerCase(),
+        "ustensils" : rec.ustensils
+    });
+
+    for (let ing of rec.ingredients) {
+        recipesByIng.push({
+            "recipeId": rec.id,
+            "ingredient" : ing.ingredient
+        });
+    }    
+}
+/*
 for(let recipe of recipes) {
     let recipeIng = recipe.ingredients;
     let recipeUst = recipe.ustensils;
@@ -10,12 +41,29 @@ for(let recipe of recipes) {
     let recipeDesc = recipe.description; 
     recipeDesc = recipeDesc.substring(0,200);
     appArray.push((recipe.appliance).toLowerCase());
+    recipeBy.push({
+        "recipeId" : recipe.id,
+        "appliance": recipe.appliance.toLowerCase(),
+        "description" : recipe.description.toLowerCase(),
+        "ustensils" : recipe.ustensils
+    });
     
+    for (let ust of recipe.ustensils) {
+        recipeByUst.push({
+            "recipeId" : recipe.id,
+            "ustensil" : ust 
+        })
+    }
+
     for (let ing of recipeIng) {
         ing.quantity == undefined ? quantity = "" : quantity = ing.quantity;
         ing.unit == undefined ? unit = "" : unit = ing.unit;
         textIng += `<span>${ing.ingredient}: ${quantity} ${unit.substring(0,9)} </span>`; 
         ingArray.push((ing.ingredient).toLowerCase());   
+        recipeByIng.push({
+            "recipeId": recipe.id,
+            "ingredient" : ing.ingredient
+        });
     }
 
     for (let ust of recipeUst) {
@@ -45,5 +93,4 @@ for(let recipe of recipes) {
                                                         </div>`
 }
 
-
-
+*/
