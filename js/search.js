@@ -37,8 +37,11 @@ function selectedTag(type,tag) {
 }
 
 
-
-/*icoSearch.addEventListener("click", () => {
-    filterRecipes(mainSearch.value);
+icoSearch.addEventListener("click", () => {
+    let newRecipes = searchRecipes(mainSearch.value);
     
-});*/
+    if(newRecipes.length > 0) {
+        display_Recipes(newRecipes);
+    }
+
+});

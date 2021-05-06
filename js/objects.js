@@ -3,7 +3,8 @@ class Recipe {
         this.arrRecipes = arrRecipes;
     }
 
-    get_Render() {
+    get_Render() {      
+        document.getElementById("listRecipes").innerHTML = "";  
         for(let recipe of this.arrRecipes) {
             let recipeIng = recipe.ingredients;
             let recipeUst = recipe.ustensils;
@@ -23,7 +24,6 @@ class Recipe {
             for (let ust of recipeUst) {
                 ustArray.push((ust).toLowerCase());
             }   
-        
             document.getElementById("listRecipes").innerHTML += `<div class="col-12 col-md-6 col-lg-4 mb-5 border-light js-recipe">
                                                                     <div class="card">
                                                                         <img class="card-img-top" src="images/img.png" alt="vignette recette">
@@ -35,17 +35,12 @@ class Recipe {
                                                                             <div class="card-content pb-3">
                                                                                 <div class="card-text ingList"> ${textIng}</div>
                                                                                 <p class="card-text descRecipe"> ${recipeDesc}...</p>
-                                                                            </div>
-                                                                            <div class="card-details pl-3 mb-3">
-                                                                                <p class="card-text">
-                                                                                    Appareil : ${recipe.appliance} <br>
-                                                                                    Ustensiles : ${recipe.ustensils}
-                                                                                </p>
-                                                                            </div>
+                                                                            </div>                                                                            
                                                                         </div>
                                                                     </div>
                                                                 </div>`
         }
+        
     }
 }
 
@@ -55,17 +50,17 @@ class Recipe {
 
 
 class TagList {
-    constructor(type, tag, label, array) {
+    constructor(type, tag, label, filtArray) {
         this.type = type,
         this.tag = tag,
         this.label = label,
-        this.array = array
+        this.filtArray = filtArray
     }
 
     get_Render() {
         let counter = 0;
         let maxCount = 0;
-        let arr = this.array;
+        let arr = this.filtArray;
             
         arr.length > 30 ? maxCount = 30 : maxCount = arr.length;
     
@@ -90,7 +85,7 @@ class TagList {
             btnDown.style.display ="none";
             btnUp.style.display = "block";
     
-            for (let item of this.array) {
+            for (let item of this.filtArray) {
                 if (counter < maxCount) { 
                     listItem.innerHTML += `<span data-value="${item.capitalize()}" data-type="${this.type}" onClick="selectedTag(this.dataset.type,this.dataset.value)">${item.capitalize()}</span>`;
                     counter ++; 
@@ -107,22 +102,13 @@ class TagList {
         });
     
         
-        /**
-         * ALGORITHME #02
-         * Tag list filters
-         * Use condition if 
-        */
         let arrFilter= [];
         
         searchText.addEventListener("input", () => {
             let valSearch = searchText.value;            
             valSearch = valSearch.replace(/ /g, "");
             if (valSearch.length > 2) {
-                for(let ing of this.array) {
-                    if (ing.indexOf(valSearch)>-1) {
-                        arrFilter.push(ing);
-                    }
-                }
+                arrFilter = this.filtArray.filter(elt => elt.includes(valSearch.replace(/ /g, "")));
             }
             else if(valSearch.length === 0) {
                 arrFilter.splice(0, arrFilter.length);
@@ -141,7 +127,6 @@ class TagList {
     get_Selected() {
         let tagSelected =  document.getElementById("tag");
         let btnLabel;
-
         tagSelected.innerHTML = this.tag + "<i class='far fa-times-circle'></i>";
         tagSelected.style.display = "block";
         tagSelected.classList.add("color" + this.type); 
@@ -173,14 +158,17 @@ class TagList {
 
         closeTag.addEventListener("click", () => {
             tagSelected.style.display = "none";
-            list.forEach(elt => {
+            display_Recipes(recipes);
+            /*list.forEach(elt => {
                 elt.style.display = "block";
-            });
-
+            });*/
         });
 
         if (valTag !="") {   
-            taggedRecipes(this.type,valTag);
+           let newRecipes = taggedRecipes(this.type,valTag);
+           if(newRecipes.length > 0) {
+               display_Recipes(newRecipes);
+           }
         }         
     }
 }

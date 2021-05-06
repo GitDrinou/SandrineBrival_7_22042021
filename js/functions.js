@@ -1,17 +1,24 @@
 
-function taggedRecipes(type,val) {
-    
-    let tmpRecipes;
-    let newRecipes = [];
+function display_Recipes(newArrRecipes) {
+    return new Recipe(newArrRecipes).get_Render();    
+}
 
-    val = val.toLowerCase();
+function taggedRecipes(type,val) {
+
+    let tmpRecipes = [];
+    let newRecipes = [];
     
+    val = val.toLowerCase();
+   
     switch (type) {
         case "Ing":
             tmpRecipes = recipesByIng.filter(elt => elt["ingredient"].toLowerCase() === val);
             break;
-    
-        default:
+        case "App" :
+            tmpRecipes = recipesByOther.filter(elt => elt["appliance"].toLowerCase() === val);
+            break;
+        case "Ust" :
+            tmpRecipes = recipesByUst.filter(elt => elt["ustensil"].toLowerCase() === val);
             break;
     }
 
@@ -21,39 +28,36 @@ function taggedRecipes(type,val) {
                 newRecipes.push(recipe);
             }
         }        
+    }    
+
+    return newRecipes;   
+}
+
+
+function searchRecipes(val) {
+
+    let tmpRecipes = [];
+    let tmp = [];
+    let newRecipes = [];
+    
+    val = val.toLowerCase();
+        
+    tmp.push(recipesByIng.filter(elt => elt["ingredient"].toLowerCase().includes(val)));
+    tmp.push(recipesByOther.filter(elt => elt["appliance"].toLowerCase().includes(val)));
+    tmp.push(recipesByUst.filter(elt => elt["ustensil"].toLowerCase().includes(val)));
+    tmp.push(recipesByOther.filter(elt => elt["description"].toLowerCase().includes(val)));
+
+    for (let item of tmp) {
+        item.forEach(elt => tmpRecipes.push(elt.recipeId));
     }
 
-    console.log(newRecipes);
-    let filteredRecipes = new Recipe(newRecipes).get_Render();
+    for(let recipe of recipes) {
+        for(let n of [... new Set(tmpRecipes)]){
+            if (recipe.id == n) {
+                newRecipes.push(recipe);
+            }
+        }        
+    }  
     
-    console.log(filteredRecipes)
-    
-    
-
-    /*console.log("Appareil");
-    console.log(recipeBy.filter(elt => elt["appliance"].includes(val)));
-    console.log("Ingredients");
-    console.log();
-    console.log("Description");
-    console.log(recipeBy.filter(elt => elt["description"].includes(val)));
-    */
-
-   /*
-        list.forEach(elt => {
-
-        // DOM Content verification
-        let recipeCard = elt.textContent.toLowerCase(); 
-           
-        //console.log(recipeCard.includes(val));           
-        if ((val.length >=3) && (recipeCard.indexOf(val) !== -1)) {
-            //console.log(recipeCard);
-            elt.style.display="block";
-        }
-        else {
-            elt.style.display = "none";
-        }                
-    }); 
-     */ 
-
-   
+    return newRecipes;  
 }
