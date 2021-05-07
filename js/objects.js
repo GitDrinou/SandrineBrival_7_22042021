@@ -3,7 +3,7 @@ class Recipe {
         this.arrRecipes = arrRecipes;
     }
 
-    get_Render() {      
+    get_Render() {    
         document.getElementById("listRecipes").innerHTML = "";  
         for(let recipe of this.arrRecipes) {
             let recipeIng = recipe.ingredients;
@@ -11,19 +11,20 @@ class Recipe {
             let textIng=``;
             let quantity, unit;
             let recipeDesc = recipe.description; 
-            recipeDesc = recipeDesc.substring(0,200);
+            recipeDesc = recipeDesc.substring(0,200);            
             appArray.push((recipe.appliance).toLowerCase());
-                                
+
             for (let ing of recipeIng) {
                 ing.quantity == undefined ? quantity = "" : quantity = ing.quantity;
                 ing.unit == undefined ? unit = "" : unit = ing.unit;
-                textIng += `<span>${ing.ingredient}: ${quantity} ${unit.substring(0,9)} </span>`; 
-                ingArray.push((ing.ingredient).toLowerCase());   
+                textIng += `<span>${ing.ingredient}: ${quantity} ${unit.substring(0,9)} </span>`;
+                ingArray.push((ing.ingredient).toLowerCase());                 
             }
-        
+
             for (let ust of recipeUst) {
                 ustArray.push((ust).toLowerCase());
-            }   
+            } 
+        
             document.getElementById("listRecipes").innerHTML += `<div class="col-12 col-md-6 col-lg-4 mb-5 border-light js-recipe">
                                                                     <div class="card">
                                                                         <img class="card-img-top" src="images/img.png" alt="vignette recette">
@@ -39,14 +40,11 @@ class Recipe {
                                                                         </div>
                                                                     </div>
                                                                 </div>`
+
         }
         
     }
 }
-
-
-
-
 
 
 class TagList {
@@ -61,7 +59,7 @@ class TagList {
         let counter = 0;
         let maxCount = 0;
         let arr = this.filtArray;
-            
+        
         arr.length > 30 ? maxCount = 30 : maxCount = arr.length;
     
         const btn = document.getElementById("btn" + this.type);
@@ -84,8 +82,9 @@ class TagList {
             searchText.setAttribute("placeholder", "Recherche un " + this.label);
             btnDown.style.display ="none";
             btnUp.style.display = "block";
-    
-            for (let item of this.filtArray) {
+            
+            console.log(arr);
+            for (let item of arr) {
                 if (counter < maxCount) { 
                     listItem.innerHTML += `<span data-value="${item.capitalize()}" data-type="${this.type}" onClick="selectedTag(this.dataset.type,this.dataset.value)">${item.capitalize()}</span>`;
                     counter ++; 
@@ -108,7 +107,7 @@ class TagList {
             let valSearch = searchText.value;            
             valSearch = valSearch.replace(/ /g, "");
             if (valSearch.length > 2) {
-                arrFilter = this.filtArray.filter(elt => elt.includes(valSearch.replace(/ /g, "")));
+                arrFilter = arr.filter(elt => elt.includes(valSearch.replace(/ /g, "")));
             }
             else if(valSearch.length === 0) {
                 arrFilter.splice(0, arrFilter.length);

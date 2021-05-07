@@ -1,6 +1,4 @@
-const ingArray = [];
-const appArray = [];
-const ustArray = [];
+
 
 let recipesByIng = [];
 let recipesByUst = [];
@@ -21,9 +19,9 @@ for (let rec of recipes) {
 
     recipesByOther.push({
         "recipeId" : rec.id,
-        "appliance": rec.appliance.toLowerCase(),
-        "description" : rec.description.toLowerCase(),
-        "ustensils" : rec.ustensils
+        "name" : rec.name,
+        "appliance": rec.appliance,
+        "description" : rec.description,
     });
 
     for (let ing of rec.ingredients) {

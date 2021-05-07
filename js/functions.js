@@ -1,6 +1,15 @@
-
+// affiche la liste des recettes
 function display_Recipes(newArrRecipes) {
     return new Recipe(newArrRecipes).get_Render();    
+}
+
+// affiche la liste des tags
+function display_tagList(type,tag,label,tagArray) {    
+    return new TagList(type,tag,label,tagArray).get_Render();
+}
+
+function selectedTag(type,tag) {
+    const tagged = new TagList(type,tag).get_Selected();    
 }
 
 function taggedRecipes(type,val) {
@@ -41,10 +50,9 @@ function searchRecipes(val) {
     let newRecipes = [];
     
     val = val.toLowerCase();
-        
+    
+    tmp.push(recipesByOther.filter(elt => elt["name"].toLowerCase().includes(val)));    
     tmp.push(recipesByIng.filter(elt => elt["ingredient"].toLowerCase().includes(val)));
-    tmp.push(recipesByOther.filter(elt => elt["appliance"].toLowerCase().includes(val)));
-    tmp.push(recipesByUst.filter(elt => elt["ustensil"].toLowerCase().includes(val)));
     tmp.push(recipesByOther.filter(elt => elt["description"].toLowerCase().includes(val)));
 
     for (let item of tmp) {
@@ -58,6 +66,21 @@ function searchRecipes(val) {
             }
         }        
     }  
+
+    /* Update tags arrays */
+    ingArray.splice(0,ingArray.length);
+    appArray.splice(0,appArray.length);
+    ustArray.splice(0,ustArray.length);
+
+    for (let recipe of newRecipes) {
+        appArray.push((recipe.appliance).toLowerCase());
+        for (let ing of recipe.ingredients) {
+            ingArray.push((ing.ingredient).toLowerCase());   
+        }    
+        for (let ust of recipe.ustensils) {
+            ustArray.push((ust).toLowerCase());
+        }   
+    }
     
     return newRecipes;  
 }
