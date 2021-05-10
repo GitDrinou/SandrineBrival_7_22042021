@@ -4,7 +4,7 @@ let recipesByIng = [];
 let recipesByUst = [];
 let recipesByOther = [];
 
-document.onload = display_Recipes(recipes);
+document.onload = display_Recipes(recipes,tmpIngs,tmpApps,tmpUsts);
 
 
 // fill arrays recipesBy...

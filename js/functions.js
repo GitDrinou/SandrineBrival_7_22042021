@@ -1,35 +1,40 @@
 // affiche la liste des recettes
-function display_Recipes(newArrRecipes) {
-    return new Recipe(newArrRecipes).get_Render();    
+function display_Recipes(newRecipes, bDefaultfilters, ings, apps, usts ) {
+    return new Recipe(newRecipes,bDefaultfilters, ings, apps, usts).get_Render();    
 }
 
 // affiche la liste des tags
-function display_tagList(type,tag,label,tagArray) {    
+function display_tagList(type,tag,label,tagArray) {   
     return new TagList(type,tag,label,tagArray).get_Render();
 }
 
 function selectedTag(type,tag) {
-    const tagged = new TagList(type,tag).get_Selected();    
+    tags.push({
+        "type" : type,
+        "tag" : tag
+    })
+    
+    const tagged = new TagList(type,tags).get_Selected();    
 }
 
-function taggedRecipes(type,val) {
+
+function taggedRecipes(tagValues) {
 
     let tmpRecipes = [];
     let newRecipes = [];
-    
-    val = val.toLowerCase();
-   
-    switch (type) {
-        case "Ing":
-            tmpRecipes = recipesByIng.filter(elt => elt["ingredient"].toLowerCase() === val);
-            break;
-        case "App" :
-            tmpRecipes = recipesByOther.filter(elt => elt["appliance"].toLowerCase() === val);
-            break;
-        case "Ust" :
-            tmpRecipes = recipesByUst.filter(elt => elt["ustensil"].toLowerCase() === val);
-            break;
-    }
+    for (let val of tagValues) {
+        switch (val.type) {            
+            case "Ing":
+                tmpRecipes = recipesByIng.filter(elt => elt["ingredient"].toLowerCase() === val["valContent"].toLowerCase());                
+                break;
+            case "App" :
+                tmpRecipes = recipesByOther.filter(elt => elt["appliance"].toLowerCase() === val["valContent"].toLowerCase());  
+                break;
+            case "Ust" :
+                tmpRecipes = recipesByUst.filter(elt => elt["ustensil"].toLowerCase() === val["valContent"].toLowerCase());  
+                break;
+        }
+    }    
 
     for(let recipe of recipes) {
         for(let n of tmpRecipes){
@@ -66,21 +71,6 @@ function searchRecipes(val) {
             }
         }        
     }  
-
-    /* Update tags arrays */
-    ingArray.splice(0,ingArray.length);
-    appArray.splice(0,appArray.length);
-    ustArray.splice(0,ustArray.length);
-
-    for (let recipe of newRecipes) {
-        appArray.push((recipe.appliance).toLowerCase());
-        for (let ing of recipe.ingredients) {
-            ingArray.push((ing.ingredient).toLowerCase());   
-        }    
-        for (let ust of recipe.ustensils) {
-            ustArray.push((ust).toLowerCase());
-        }   
-    }
     
     return newRecipes;  
 }

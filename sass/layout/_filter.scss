@@ -70,25 +70,30 @@
 
 
 .tagSelected {
-        display: block;
         max-width: max-content;
+        display: block;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        
+}
+
+.js-selected {
+        max-width: max-content;
         padding: 0.5rem;
-        line-height: 1rem;
+        line-height: 2rem;
         font-size: 0.875rem;
         font-weight: 700;
         border-radius: 5px;
+        border: 5px solid #FFF;
         color: #FFF;
         & .fa-times-circle {
                 font-size: 1.25rem;
                 padding-left: 1rem;
-                margin-top: -0.2rem;
+                //margin-top: 0.5rem;
                 
-        }
+        }  
 }
-
 .colorIng {
         background-color: $col-boot-primary;
 }

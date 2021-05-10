@@ -1,6 +1,9 @@
 class Recipe {
-    constructor(arrRecipes) {
-        this.arrRecipes = arrRecipes;
+    constructor(arrRecipes, ings, apps, usts) {
+        this.arrRecipes = arrRecipes,
+        this.ings = ings,
+        this.apps = apps,
+        this.usts = usts     
     }
 
     get_Render() {    
@@ -11,19 +14,15 @@ class Recipe {
             let textIng=``;
             let quantity, unit;
             let recipeDesc = recipe.description; 
-            recipeDesc = recipeDesc.substring(0,200);            
-            appArray.push((recipe.appliance).toLowerCase());
+            recipeDesc = recipeDesc.substring(0,200);        
 
             for (let ing of recipeIng) {
                 ing.quantity == undefined ? quantity = "" : quantity = ing.quantity;
                 ing.unit == undefined ? unit = "" : unit = ing.unit;
-                textIng += `<span>${ing.ingredient}: ${quantity} ${unit.substring(0,9)} </span>`;
-                ingArray.push((ing.ingredient).toLowerCase());                 
+                textIng += `<span>${ing.ingredient}: ${quantity} ${unit.substring(0,9)} </span>`;                
             }
 
-            for (let ust of recipeUst) {
-                ustArray.push((ust).toLowerCase());
-            } 
+            
         
             document.getElementById("listRecipes").innerHTML += `<div class="col-12 col-md-6 col-lg-4 mb-5 border-light js-recipe">
                                                                     <div class="card">
@@ -42,15 +41,29 @@ class Recipe {
                                                                 </div>`
 
         }
+                
+        btnFilter.forEach((btn) => {     
+            switch(btn.getAttribute("id")) {
+                case "btnIng":
+                    display_tagList("Ing","","ingredient",[... new Set(this.ings)]);
+                    break;
+                case "btnApp":
+                    display_tagList("App","","appareil",[... new Set(this.apps)]);
+                    break;
+                case "btnUst":
+                    display_tagList("Ust","","ustensile",[... new Set(this.usts)]);
+                    break;
+            }
+        });
         
     }
 }
 
 
 class TagList {
-    constructor(type, tag, label, filtArray) {
+    constructor(type, tags, label, filtArray) {
         this.type = type,
-        this.tag = tag,
+        this.tags = tags,
         this.label = label,
         this.filtArray = filtArray
     }
@@ -82,8 +95,9 @@ class TagList {
             searchText.setAttribute("placeholder", "Recherche un " + this.label);
             btnDown.style.display ="none";
             btnUp.style.display = "block";
+
+            listItem.innerHTML = "";
             
-            console.log(arr);
             for (let item of arr) {
                 if (counter < maxCount) { 
                     listItem.innerHTML += `<span data-value="${item.capitalize()}" data-type="${this.type}" onClick="selectedTag(this.dataset.type,this.dataset.value)">${item.capitalize()}</span>`;
@@ -104,15 +118,11 @@ class TagList {
         let arrFilter= [];
         
         searchText.addEventListener("input", () => {
-            let valSearch = searchText.value;            
-            valSearch = valSearch.replace(/ /g, "");
+            let valSearch = searchText.value;  
             if (valSearch.length > 2) {
                 arrFilter = arr.filter(elt => elt.includes(valSearch.replace(/ /g, "")));
             }
-            else if(valSearch.length === 0) {
-                arrFilter.splice(0, arrFilter.length);
-            }
-
+   
             listItem.innerHTML = "";
             search.style.display ="block";
             btn.style="width:600px";
@@ -124,24 +134,37 @@ class TagList {
     }
    
     get_Selected() {
+
         let tagSelected =  document.getElementById("tag");
         let btnLabel;
-        tagSelected.innerHTML = this.tag + "<i class='far fa-times-circle'></i>";
+        let valTags = []; 
+        tagSelected.innerHTML = " ";
+
+        for(let tag of tags) {
+            tagSelected.innerHTML += `<span class="js-selected color${tag.type}" data-type="${tag.type}">${tag.tag}<i class="far fa-times-circle"></i></span>`;
+            tagSelected.classList.add("color" + tag.type); 
+            valTags.push({
+                "type" : tag.type,
+                "valContent" : tag.tag
+            });
+        }    
+        
+        console.log(valTags);
+        
         tagSelected.style.display = "block";
-        tagSelected.classList.add("color" + this.type); 
 
         switch (this.type) {
             case "Ing" : 
                 btnLabel = "Ingredients";
-                tagSelected.classList.remove("colorApp", "colorUst");
+                //tagSelected.classList.remove("colorApp", "colorUst");
                 break;
             case "App" : 
                 btnLabel = "Appareils";
-                tagSelected.classList.remove("colorIng", "colorUst");
+                //tagSelected.classList.remove("colorIng", "colorUst");
                 break;
             case "Ust" : 
                 btnLabel = "Ustensiles";
-                tagSelected.classList.remove("colorIng", "colorApp");
+                //tagSelected.classList.remove("colorIng", "colorApp");
                 break;
         }
 
@@ -151,23 +174,55 @@ class TagList {
         document.getElementById("btnDown" + this.type).style.display = "block";
         document.getElementById("btnUp" + this.type).style.display = "none"; 
         
-        
-        let valTag = document.getElementById("tag").textContent;  
-        let closeTag = document.querySelector(".fa-times-circle");
+        let newRecipes = taggedRecipes(valTags);  
 
-        closeTag.addEventListener("click", () => {
-            tagSelected.style.display = "none";
-            display_Recipes(recipes);
-            /*list.forEach(elt => {
-                elt.style.display = "block";
-            });*/
-        });
-
-        if (valTag !="") {   
-           let newRecipes = taggedRecipes(this.type,valTag);
+        if (valTags.length > 0 ) {  
            if(newRecipes.length > 0) {
-               display_Recipes(newRecipes);
-           }
-        }         
+                /* Update tags arrays */            
+                for (let recipe of newRecipes) {
+                    newTmpApps.push((recipe.appliance));
+                    for (let ing of recipe.ingredients) {
+                        newTmpIngs.push((ing.ingredient));   
+                    }    
+                    for (let ust of recipe.ustensils) {
+                        newTmpUsts.push((ust.capitalize()));
+                    }   
+                }                
+            } 
+            
+            display_Recipes(newRecipes,newTmpIngs,newTmpApps,newTmpUsts); 
+        
+        
+            let closeTag = document.querySelectorAll(".fa-times-circle");
+            closeTag.forEach ((btn) => {
+                btn.addEventListener("click", () => {
+                    let tagText = btn.previousSibling;
+                    valTags.splice(valTags.indexOf(tagText),1);
+                    btn.parentElement.style.display = "none";
+                    newRecipes.splice(0,newRecipes.length);
+                    newRecipes = taggedRecipes(valTags);
+                    if (valTags.length > 0 ) {  
+
+                        let newRecipes = taggedRecipes(valTags);           
+            
+                        if(newRecipes.length > 0) {
+            
+                            /* Update tags arrays */            
+                            for (let recipe of newRecipes) {
+                                newTmpApps.push((recipe.appliance));
+                                for (let ing of recipe.ingredients) {
+                                    newTmpIngs.push((ing.ingredient));   
+                                }    
+                                for (let ust of recipe.ustensils) {
+                                    newTmpUsts.push((ust.capitalize()));
+                                }   
+                            }                
+                        } 
+                        
+                        display_Recipes(newRecipes,newTmpIngs,newTmpApps,newTmpUsts);  
+                    }            
+                });
+            });
+        }
     }
 }
