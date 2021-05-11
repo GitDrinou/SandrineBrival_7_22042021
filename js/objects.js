@@ -137,16 +137,11 @@ class TagList {
 
         let tagSelected =  document.getElementById("tag");
         let btnLabel;
-        let valTags = []; 
         tagSelected.innerHTML = " ";
 
         for(let tag of tags) {
             tagSelected.innerHTML += `<span class="js-selected color${tag.type}" data-type="${tag.type}">${tag.tag}<i class="far fa-times-circle"></i></span>`;
             tagSelected.classList.add("color" + tag.type); 
-            valTags.push({
-                "type" : tag.type,
-                "valContent" : tag.tag
-            });
         }    
                 
         tagSelected.style.display = "block";
@@ -154,15 +149,12 @@ class TagList {
         switch (this.type) {
             case "Ing" : 
                 btnLabel = "Ingredients";
-                //tagSelected.classList.remove("colorApp", "colorUst");
                 break;
             case "App" : 
                 btnLabel = "Appareils";
-                //tagSelected.classList.remove("colorIng", "colorUst");
                 break;
             case "Ust" : 
                 btnLabel = "Ustensiles";
-                //tagSelected.classList.remove("colorIng", "colorApp");
                 break;
         }
 
@@ -172,9 +164,9 @@ class TagList {
         document.getElementById("btnDown" + this.type).style.display = "block";
         document.getElementById("btnUp" + this.type).style.display = "none"; 
         
-        let newRecipes = taggedRecipes(valTags);  
+        let newRecipes = taggedRecipes(tags);  
 
-        if (valTags.length > 0 ) {  
+        if (tags.length > 0 ) {  
            if(newRecipes.length > 0) {
                 /* Update tags arrays */            
                 for (let recipe of newRecipes) {
@@ -195,13 +187,13 @@ class TagList {
             closeTag.forEach ((btn) => {
                 btn.addEventListener("click", () => {
                     let tagText = btn.previousSibling;
-                    valTags.splice(valTags.indexOf(tagText),1);
+                    tags.splice(tags.indexOf(tagText),1);
                     btn.parentElement.style.display = "none";
                     newRecipes.splice(0,newRecipes.length);
 
-                    if (valTags.length > 0 ) {  
+                    if (tags.length > 0 ) {  
                         
-                        newRecipes = taggedRecipes(valTags);          
+                        newRecipes = taggedRecipes(tags);          
             
                         if(newRecipes.length > 0) {
             

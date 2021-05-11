@@ -9,22 +9,10 @@ function display_tagList(type,tag,label,tagArray) {
 }
 
 function selectedTag(type,tag) {
-   if (tags.length > 0) {
-       for (let t of tags) {
-           if (t.tag !== tag) {
-               tags.push({
-                    "type" : type,
-                    "tag" : tag
-                });
-           }
-       }
-   }   
-   else {
-        tags.push({
+   tags.push({
             "type" : type,
             "tag" : tag
-        });
-   } 
+    });
     
     const tagged = new TagList(type,tags).get_Selected();    
 }
@@ -37,13 +25,13 @@ function taggedRecipes(tagValues) {
     for (let val of tagValues) {
         switch (val.type) {            
             case "Ing":
-                tmpRecipes = recipesByIng.filter(elt => elt["ingredient"].toLowerCase() === val["valContent"].toLowerCase());                
+                tmpRecipes = recipesByIng.filter(elt => elt["ingredient"].toLowerCase() === val["tag"].toLowerCase());                
                 break;
             case "App" :
-                tmpRecipes = recipesByOther.filter(elt => elt["appliance"].toLowerCase() === val["valContent"].toLowerCase());  
+                tmpRecipes = recipesByOther.filter(elt => elt["appliance"].toLowerCase() === val["tag"].toLowerCase());  
                 break;
             case "Ust" :
-                tmpRecipes = recipesByUst.filter(elt => elt["ustensil"].toLowerCase() === val["valContent"].toLowerCase());  
+                tmpRecipes = recipesByUst.filter(elt => elt["ustensil"].toLowerCase() === val["tag"].toLowerCase());  
                 break;
         }
     }    
