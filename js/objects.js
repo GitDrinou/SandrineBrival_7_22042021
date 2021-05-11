@@ -148,9 +148,7 @@ class TagList {
                 "valContent" : tag.tag
             });
         }    
-        
-        console.log(valTags);
-        
+                
         tagSelected.style.display = "block";
 
         switch (this.type) {
@@ -200,10 +198,10 @@ class TagList {
                     valTags.splice(valTags.indexOf(tagText),1);
                     btn.parentElement.style.display = "none";
                     newRecipes.splice(0,newRecipes.length);
-                    newRecipes = taggedRecipes(valTags);
-                    if (valTags.length > 0 ) {  
 
-                        let newRecipes = taggedRecipes(valTags);           
+                    if (valTags.length > 0 ) {  
+                        
+                        newRecipes = taggedRecipes(valTags);          
             
                         if(newRecipes.length > 0) {
             
@@ -220,9 +218,12 @@ class TagList {
                         } 
                         
                         display_Recipes(newRecipes,newTmpIngs,newTmpApps,newTmpUsts);  
-                    }            
+                    }  
+                    else {
+                        display_Recipes(recipes,tmpIngs,tmpApps,tmpUsts);
+                    }          
                 });
-            });
+            });            
         }
     }
 }

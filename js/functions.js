@@ -9,10 +9,22 @@ function display_tagList(type,tag,label,tagArray) {
 }
 
 function selectedTag(type,tag) {
-    tags.push({
-        "type" : type,
-        "tag" : tag
-    })
+   if (tags.length > 0) {
+       for (let t of tags) {
+           if (t.tag !== tag) {
+               tags.push({
+                    "type" : type,
+                    "tag" : tag
+                });
+           }
+       }
+   }   
+   else {
+        tags.push({
+            "type" : type,
+            "tag" : tag
+        });
+   } 
     
     const tagged = new TagList(type,tags).get_Selected();    
 }
