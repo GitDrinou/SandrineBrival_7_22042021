@@ -83,7 +83,7 @@ const recipes = [
               "unit" : "ml"
           },
           {
-              "ingredient": "Coulis de tomates",
+              "ingredient": "Coulis de tomate",
               "quantity" : 25,
               "unit" : "cl"
           },
@@ -100,7 +100,7 @@ const recipes = [
           }
       ],
       "time": 80,
-      "description": "Découper le poulet en morceaux, les faire dorer dans une cocotte avec de l'huile d'olive. Salez et poivrez. Une fois doré, laisser cuire en ajoutant de l'eau. Au bout de 30 minutes, ajouter le coulis de tomates, le lait de coco ainsi que le poivron et l'oignon découpés en morceaux. Laisser cuisiner 30 minutes de plus. Servir avec du riz",
+      "description": "Découper le poulet en morceaux, les faire dorer dans une cocotte avec de l'huile d'olive. Salez et poivrez. Une fois doré, laisser cuire en ajoutant de l'eau. Au bout de 30 minutes, ajouter le coulis de tomate, le lait de coco ainsi que le poivron et l'oignon découpés en morceaux. Laisser cuisiner 30 minutes de plus. Servir avec du riz",
       "appliance": "Cocotte",
       "ustensils": ["couteau"]
   },{
@@ -718,7 +718,7 @@ const recipes = [
               "quantity": 2
           },
           {
-              "ingredient": "Coulis de tomates",
+              "ingredient": "Coulis de tomate",
               "quantity": 300,
               "unit":"g"
           },
@@ -954,7 +954,7 @@ const recipes = [
       ],
       "time": 15,
       "description":"Faire fondre l'oseille avec du beurre demi sel, ajouter un litre d'eau. Ajouter les vermicelles. Laisser cuire. une foit prêt, sortir du feu et après 5 minutes ajouter le jaune d'oeuf et la crême fraîche",
-      "appliance": "casserole",
+      "appliance": "Casserole",
       "ustensils":["couteau","cuillère en bois"]
   },
   {
@@ -1416,7 +1416,7 @@ const recipes = [
       ],
       "time": 20,
       "description":"Séparer les blancs d'oeufs. Faire fondre le chocolat au bain marie. Ajouter les jaunes et le sucre au chocolat hors du feu. Battre les blancs en neige. Ajouter les blancs au mélange de chocolat. Mélangez délicatement avec une spatule. Servir dans un plat ou dans des verres. Mettre au frais",
-      "appliance": "casserole",
+      "appliance": "Casserole",
       "ustensils":["fouet", "spatule", "verres"]
   }, 
   {
@@ -1514,7 +1514,7 @@ const recipes = [
       ],
       "time": 15,
       "description":"Mélanger la farine et le beurre fondu en ajoutant le lait peu à peu. Ajouter du sucre après la cuisson. Bien mélanger. Ajouter le chocolat en morceaux et laisser chauffer 8 minutes en mélangeant avec une cuillère en bois. Mettre dans des verres",
-      "appliance": "casserole",
+      "appliance": "Casserole",
       "ustensils":["cuillère en bois"]
   },
   {
@@ -1544,7 +1544,7 @@ const recipes = [
       ],
       "time": 30,
       "description":"Faire bouillir le lait ( on peut y ajouter de l'essence de vanille. Battre les oeufs et le sucre, ajouter la farine puis finalement ajouter le lait chaud. Remettre à feu doux pour faire épaissir en remuant pendant 5 à 10 minutes.",
-      "appliance": "casserole",
+      "appliance": "Casserole",
       "ustensils":["fouet","saladier"]
   },
   {
