@@ -1,4 +1,7 @@
-
+/**
+ * addEventListener on search button
+ * call searchRecipes function 
+ */
 icoSearch.addEventListener("click", () => {
 
     mainSearch.setAttribute("data-main",true);
@@ -6,7 +9,7 @@ icoSearch.addEventListener("click", () => {
     let valSearch = mainSearch.value;
     if (valSearch.length >=3) {
 
-        let newRecipes = searchRecipes(valSearch);
+        newRecipes = searchRecipes(valSearch);
 
         if(newRecipes.length > 0) {
 

@@ -1,3 +1,7 @@
+/**
+ * Recipe object
+ *  with get_Render method
+ */
 class Recipe {
     constructor(arrRecipes, ings, apps, usts) {
         this.arrRecipes = arrRecipes,
@@ -54,12 +58,14 @@ class Recipe {
                     display_tagList("Ust","","ustensile",[... new Set(this.usts)]);
                     break;
             }
-        });
-        
+        });        
     }
 }
 
-
+/**
+ * TagList object
+ *  with get_Render and get_Selected methods
+ */
 class TagList {
     constructor(type, tags, label, filtArray) {
         this.type = type,
@@ -164,7 +170,7 @@ class TagList {
         document.getElementById("btnDown" + this.type).style.display = "block";
         document.getElementById("btnUp" + this.type).style.display = "none"; 
         
-        let newRecipes = taggedRecipes(tags);  
+        newRecipes = taggedRecipes(tags); 
 
         if (tags.length > 0 ) {  
            if(newRecipes.length > 0) {
@@ -184,6 +190,7 @@ class TagList {
         
         
             let closeTag = document.querySelectorAll(".fa-times-circle");
+
             closeTag.forEach ((btn) => {
                 btn.addEventListener("click", () => {
                     let tagText = btn.previousSibling;
@@ -212,7 +219,13 @@ class TagList {
                         display_Recipes(newRecipes,newTmpIngs,newTmpApps,newTmpUsts);  
                     }  
                     else {
-                        display_Recipes(recipes,tmpIngs,tmpApps,tmpUsts);
+                        if (mainSearch.value !="") {
+                            newRecipes = searchRecipes(mainSearch.value);
+                            display_Recipes(newRecipes,newTmpIngs,newTmpApps,newTmpUsts);
+                        }
+                        else {
+                            display_Recipes(recipes,tmpIngs,tmpApps,tmpUsts);
+                        }                        
                     }          
                 });
             });            
