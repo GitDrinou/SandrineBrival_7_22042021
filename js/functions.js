@@ -1,12 +1,39 @@
-// affiche la liste des recettes
+/**
+ * display the recipes
+ * use Recipe object and get_Render method
+ * 
+ * @param {array} newRecipes 
+ * @param {boolean} bDefaultfilters
+ * @param {array} ings
+ * @param {array} apps
+ * @param {array} usts
+ * @returns
+ */
 function display_Recipes(newRecipes, bDefaultfilters, ings, apps, usts ) {
     return new Recipe(newRecipes,bDefaultfilters, ings, apps, usts).get_Render();    
 }
 
 // affiche la liste des tags
+/**
+ * display the tags lists
+ * use TagList object and get_Render method
+ * @param {string} type
+ * @param {string} tag
+ * @param {string} label
+ * @param {array} tagArray
+ * @returns 
+ */
 function display_tagList(type,tag,label,tagArray) {   
     return new TagList(type,tag,label,tagArray).get_Render();
 }
+
+/**
+ * display the selected tags
+ * use TagList object and get_Selected method
+ * 
+ * @param {string} type 
+ * @param {string} tag 
+ */
 
 function selectedTag(type,tag) {
    tags.push({
@@ -17,7 +44,14 @@ function selectedTag(type,tag) {
     const tagged = new TagList(type,tags).get_Selected();    
 }
 
-
+/**
+ * search and filter recipes
+ * with tag value(s)
+ * use filter method and recipesBy... arrays
+ * 
+ * @param {array} tagValues 
+ * @returns
+ */
 function taggedRecipes(tagValues) {
 
     let tmpRecipes = [];
@@ -47,7 +81,13 @@ function taggedRecipes(tagValues) {
     return newRecipes;   
 }
 
-
+/**
+ * search and filter recipes
+ * with main search value
+ * use filter method
+ * @param {string} val 
+ * @returns 
+ */
 function searchRecipes(val) {
 
     let tmpRecipes = [];
@@ -71,6 +111,6 @@ function searchRecipes(val) {
             }
         }        
     }  
-    
+        
     return newRecipes;  
 }

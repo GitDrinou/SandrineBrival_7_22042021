@@ -1,3 +1,7 @@
+/**
+ * Recipe object
+ *  with get_Render method
+ */
 class Recipe {
     constructor(arrRecipes, ings, apps, usts) {
         this.arrRecipes = arrRecipes,
@@ -54,12 +58,14 @@ class Recipe {
                     display_tagList("Ust","","ustensile",[... new Set(this.usts)]);
                     break;
             }
-        });
-        
+        });        
     }
 }
 
-
+/**
+ * TagList object
+ *  with get_Render and get_Selected methods
+ */
 class TagList {
     constructor(type, tags, label, filtArray) {
         this.type = type,

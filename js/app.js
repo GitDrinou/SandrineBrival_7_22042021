@@ -1,4 +1,7 @@
-
+/**
+ * addEventListener on search button
+ * call searchRecipes function 
+ */
 icoSearch.addEventListener("click", () => {
 
     mainSearch.setAttribute("data-main",true);
