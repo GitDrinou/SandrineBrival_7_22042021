@@ -17,6 +17,7 @@ let newTmpApps = [];
 let newTmpUsts = [];
 
 let tags = [];
+let newRecipes = [];
 
 
 for (let recipe of recipes) {

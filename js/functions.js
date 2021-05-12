@@ -28,6 +28,79 @@ function display_tagList(type,tag,label,tagArray) {
 }
 
 /**
+ * Store recipes by Ustensils
+ * @param {array} recipeArr 
+ * @returns 
+ */
+function byUstensils(recipeArr) {
+
+    for (let rec of recipeArr) {
+      
+        for (let ust of rec.ustensils) {
+            recipesByUst.push({
+                "recipeId" : rec.id,
+                "ustensil" : ust 
+            })
+        }
+    }
+
+    return recipesByUst;
+}
+
+/**
+ * Store recipes by Name, Appliance and description
+ * @param {array} recipeArr 
+ * @returns 
+ */
+function byNameAndDesc(recipeArr) {
+    
+    for (let rec of recipeArr) {
+      
+        recipesByOther.push({
+            "recipeId" : rec.id,
+            "name" : rec.name,
+            "appliance": rec.appliance,
+            "description" : rec.description,
+        });
+    }
+    
+    return recipesByOther;
+}
+
+/**
+ * Store recipes by Ingredients
+ * @param {array} recipeArr 
+ * @returns 
+ */
+
+function byIngredients(recipeArr) {
+    for (let rec of recipeArr) {      
+        for (let ing of rec.ingredients) {
+            recipesByIng.push({
+                "recipeId": rec.id,
+                "ingredient" : ing.ingredient
+            });
+        } 
+        
+    }
+    
+    return recipesByIng;
+}
+
+function createNewRecipes (recipeArr, tmp) {
+    let filtRecipes = [];
+    for(let recipe of recipeArr) {
+        for(let n of tmp){
+            if (recipe.id == n.recipeId) {
+                filtRecipes.push(recipe);
+            }
+        }        
+    }  
+    
+    return [... new Set(filtRecipes)];
+}
+
+/**
  * display the selected tags
  * use TagList object and get_Selected method
  * 
@@ -54,8 +127,21 @@ function selectedTag(type,tag) {
  */
 function taggedRecipes(tagValues) {
 
+    let bDefault = true;
+
+    if (newRecipes.length > 0) {
+        recipesByIng = byIngredients(newRecipes);
+        recipesByOther = byNameAndDesc(newRecipes);
+        recipesByUst = byUstensils(newRecipes);
+        bDefault = false;
+    }
+    else {
+        recipesByIng = byIngredients(recipes);
+        recipesByOther = byNameAndDesc(recipes);
+        recipesByUst = byUstensils(recipes);
+    }
+
     let tmpRecipes = [];
-    let newRecipes = [];
     for (let val of tagValues) {
         switch (val.type) {            
             case "Ing":
@@ -68,17 +154,9 @@ function taggedRecipes(tagValues) {
                 tmpRecipes = recipesByUst.filter(elt => elt["ustensil"].toLowerCase() === val["tag"].toLowerCase());  
                 break;
         }
-    }    
-
-    for(let recipe of recipes) {
-        for(let n of tmpRecipes){
-            if (recipe.id == n.recipeId) {
-                newRecipes.push(recipe);
-            }
-        }        
-    }    
-
-    return newRecipes;   
+    }   
+  
+    return (!bDefault) ?  createNewRecipes (newRecipes,tmpRecipes) : createNewRecipes (recipes,tmpRecipes);
 }
 
 /**
@@ -91,26 +169,22 @@ function taggedRecipes(tagValues) {
 function searchRecipes(val) {
 
     let tmpRecipes = [];
-    let tmp = [];
-    let newRecipes = [];
+
+    recipesByIng = byIngredients(recipes);
+    recipesByOther = byNameAndDesc(recipes);
+    recipesByUst = byUstensils(recipes);
     
     val = val.toLowerCase();
     
-    tmp.push(recipesByOther.filter(elt => elt["name"].toLowerCase().includes(val)));    
-    tmp.push(recipesByIng.filter(elt => elt["ingredient"].toLowerCase().includes(val)));
-    tmp.push(recipesByOther.filter(elt => elt["description"].toLowerCase().includes(val)));
-
-    for (let item of tmp) {
-        item.forEach(elt => tmpRecipes.push(elt.recipeId));
-    }
-
+    tmpRecipes.push(...recipesByOther.filter(elt => elt["name"].toLowerCase().includes(val)),...recipesByIng.filter(elt => elt["ingredient"].toLowerCase().includes(val)),...recipesByOther.filter(elt => elt["description"].toLowerCase().includes(val)));
+    
     for(let recipe of recipes) {
-        for(let n of [... new Set(tmpRecipes)]){
-            if (recipe.id == n) {
+        for(let n of tmpRecipes){
+            if (recipe.id == n.recipeId) {
                 newRecipes.push(recipe);
             }
         }        
     }  
         
-    return newRecipes;  
+    return [... new Set(newRecipes)];  
 }
