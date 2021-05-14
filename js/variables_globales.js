@@ -12,6 +12,8 @@ let tmpIngs = [];
 let tmpApps = [];
 let tmpUsts = [];
 
+let newRecipes = [];
+
 let newTmpIngs = [];
 let newTmpApps = [];
 let newTmpUsts = [];

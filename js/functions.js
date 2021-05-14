@@ -21,7 +21,7 @@ function selectedTag(type,tag) {
 function taggedRecipes(tagValues) {
 
     let tmpRecipes = [];
-    let newRecipes = [];
+    let tmpNewRecipes = [];
     for (let val of tagValues) {
         switch (val.type) {            
             case "Ing":
@@ -48,23 +48,33 @@ function taggedRecipes(tagValues) {
         }
     }    
 
-    for(let recipe of recipes) {
-        for(let n of tmpRecipes){
-            if (recipe.id == n.recipeId) {
-                newRecipes.push(recipe);
-            }
-        }        
-    }    
-
-    return newRecipes;   
+    if(newRecipes.length > 0) {
+        for(let recipe of newRecipes) {
+            for(let n of tmpRecipes){
+                if (recipe.id == n.recipeId) {
+                    tmpNewRecipes.push(recipe);
+                }
+            }        
+        }    
+    }
+    else {
+        for(let recipe of recipes) {
+            for(let n of tmpRecipes){
+                if (recipe.id == n.recipeId) {
+                    tmpNewRecipes.push(recipe);
+                }
+            }        
+        }  
+    }
+    
+    return [... new Set(tmpNewRecipes)];   
 }
 
 
 function searchRecipes(val) {
-
+    
     let tmpRecipes = [];
     let tmp = [];
-    let newRecipes = [];
     
     val = val.toLowerCase();
     

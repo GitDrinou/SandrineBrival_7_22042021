@@ -217,8 +217,28 @@ class TagList {
                         display_Recipes(newRecipes,newTmpIngs,newTmpApps,newTmpUsts);  
                     }  
                     else {
-                        display_Recipes(recipes,tmpIngs,tmpApps,tmpUsts);
-                    }          
+                        
+                        if (mainSearch.value != "") {
+
+                            newRecipes = searchRecipes(mainSearch.value);
+                            
+                            for (let recipe of newRecipes) {
+                                newTmpApps.push((recipe.appliance));
+                                for (let ing of recipe.ingredients) {
+                                    newTmpIngs.push((ing.ingredient));   
+                                }    
+                                for (let ust of recipe.ustensils) {
+                                    newTmpUsts.push((ust.capitalize()));
+                                }   
+                            }
+                            
+
+                            display_Recipes([... new Set(newRecipes)],newTmpIngs,newTmpApps,newTmpUsts);            
+                        }   
+                        else {
+                            display_Recipes(recipes,tmpIngs,tmpApps,tmpUsts);
+                        }
+                    }        
                 });
             });            
         }

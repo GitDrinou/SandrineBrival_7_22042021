@@ -6,7 +6,7 @@ icoSearch.addEventListener("click", () => {
     let valSearch = mainSearch.value;
     if (valSearch.length >=3) {
 
-        let newRecipes = searchRecipes(valSearch);
+        newRecipes = searchRecipes(valSearch);
 
         if(newRecipes.length > 0) {
 
