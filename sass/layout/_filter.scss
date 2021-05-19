@@ -10,14 +10,18 @@
         font-size: 1.125rem;
         outline: none;
         border: none;
-        text-align: left;
+        text-align: left;        
 }
 
 .fa-chevron-down, .fa-chevron-up {
         position: absolute;
         right: 1rem;
         top: 1.7rem;
+        @media screen and (max-width: map-get($breakpoints, mobile )) {
+                right: 2rem; 
+        }
 }
+
 
 #btnUpIng, #btnUpApp, #btnUpUst {
         display: none;
@@ -105,4 +109,14 @@
 
 .colorUst {
         background-color: $col-boot-danger;
+}
+
+@media screen and (max-width: map-get($breakpoints, mobile )) {
+        .btn-primary, .btn-success, .btn-danger {
+                width: 94%; 
+        }
+        .listIng, .listApp, .listUst {
+                grid-template-columns: 1fr 1fr;      
+                grid-gap: 0.7rem;          
+        }
 }

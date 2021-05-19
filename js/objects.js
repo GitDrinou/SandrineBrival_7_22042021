@@ -80,6 +80,12 @@ class TagList {
         let arr = this.filtArray;
         
         arr.length > 30 ? maxCount = 30 : maxCount = arr.length;
+        if(window.innerWidth > 411) {
+            arr.length > 30 ? maxCount = 30 : maxCount = arr.length;
+        }
+        else {
+            arr.length > 12 ? maxCount = 12 : maxCount = arr.length;
+        }
     
         const btn = document.getElementById("btn" + this.type);
         const btnDown = document.getElementById("btnDown" + this.type);
@@ -97,25 +103,24 @@ class TagList {
         btnDown.addEventListener("click", () => {
             search.style.display = "block";
             searchText.value="";
-            btn.style ="width:600px";
+            window.innerWidth > 411 ? btn.style ="width:50%" : btn.style ="width:100%" ;
             searchText.setAttribute("placeholder", "Recherche un " + this.label);
             btnDown.style.display ="none";
             btnUp.style.display = "block";
-
-            listItem.innerHTML = "";
             
+            listItem.innerHTML = "";
             for (let item of arr) {
-                if (counter < maxCount) { 
-                    listItem.innerHTML += `<span data-value="${item.capitalize()}" data-type="${this.type}" onClick="selectedTag(this.dataset.type,this.dataset.value)">${item.capitalize()}</span>`;
-                    counter ++; 
-                }                                       
-            }
+                    if (counter < maxCount) {                         
+                        listItem.innerHTML += `<span data-value="${item.capitalize()}" data-type="${this.type}" onClick="selectedTag(this.dataset.type,this.dataset.value)">${item.capitalize()}</span>`;
+                        counter ++; 
+                    } 
+            } 
         });
     
         btnUp.addEventListener("click", () => {
             search.style.display = "none";
             searchText.value !="" ? searchText.value = searchText.value : searchText.value = this.label ;
-            btn.style ="width:10.625rem";
+            window.innerWidth > 411 ? btn.style ="width:10.625rem" : btn.style ="width:94%" ;
             btnDown.style.display ="block";
             btnUp.style.display = "none";
         });
@@ -131,7 +136,7 @@ class TagList {
    
             listItem.innerHTML = "";
             search.style.display ="block";
-            btn.style="width:600px";
+            window.innerWidth > 411 ? btn.style ="width:50%" : btn.style ="width:100%" ;
             let newArrFilter = [... new Set(arrFilter)];
             for (let item of newArrFilter) {
                 listItem.innerHTML += `<span data-value="${item.capitalize()}" data-type="${this.type}" onClick="selectedTag(this.dataset.type,this.dataset.value)">${item.capitalize()}</span>`;
@@ -144,7 +149,7 @@ class TagList {
         let tagSelected =  document.getElementById("tag");
         let btnLabel;
         tagSelected.innerHTML = " ";
-
+        
         for(let tag of tags) {
             tagSelected.innerHTML += `<span class="js-selected color${tag.type}" data-type="${tag.type}">${tag.tag}<i class="far fa-times-circle"></i></span>`;
             tagSelected.classList.add("color" + tag.type); 
@@ -165,7 +170,7 @@ class TagList {
         }
 
         document.getElementById("b-Search" + this.type).style.display = "none";
-        document.getElementById("btn" + this.type).style ="width:10.625rem";
+        window.innerWidth > 411 ? document.getElementById("btn" + this.type).style ="width:10.625rem" : document.getElementById("btn" + this.type).style ="width:94%";
         document.getElementById("search" + this.type).value = btnLabel;
         document.getElementById("btnDown" + this.type).style.display = "block";
         document.getElementById("btnUp" + this.type).style.display = "none"; 

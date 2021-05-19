@@ -24,6 +24,24 @@ function display_Recipes(newRecipes, bDefaultfilters, ings, apps, usts ) {
  * @returns 
  */
 function display_tagList(type,tag,label,tagArray) {   
+    let ingIndex, appIndex, ustIndex;
+    for (let t of tags) {
+        switch (type) {
+            case "Ing":
+                ingIndex = tagArray.indexOf(t.tag);
+                tagArray.splice(ingIndex,1);
+                break;
+            case "App":
+                appIndex = tagArray.indexOf(t.tag);
+                tagArray.splice(ingIndex,1);
+                break;
+            case "Ust":
+                ustIndex = tagArray.indexOf(t.tag);
+                tagArray.splice(ingIndex,1);
+                break;
+        }
+    }
+   
     return new TagList(type,tag,label,tagArray).get_Render();
 }
 
@@ -177,7 +195,8 @@ function searchRecipes(val) {
     val = val.toLowerCase();
     
     tmpRecipes.push(...recipesByOther.filter(elt => elt["name"].toLowerCase().includes(val)),...recipesByIng.filter(elt => elt["ingredient"].toLowerCase().includes(val)),...recipesByOther.filter(elt => elt["description"].toLowerCase().includes(val)));
-    
+    //tmpRecipes.push(...recipesByOther.filter(elt => elt["name"].toLowerCase().indexOf(val) !==-1),...recipesByIng.filter(elt => elt["ingredient"].toLowerCase().indexOf(val) !==-1),...recipesByOther.filter(elt => elt["description"].toLowerCase().indexOf(val) !==-1));
+
     for(let recipe of recipes) {
         for(let n of tmpRecipes){
             if (recipe.id == n.recipeId) {

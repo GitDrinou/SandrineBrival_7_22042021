@@ -158,6 +158,11 @@ body {
   right: 1rem;
   top: 1.7rem;
 }
+@media screen and (max-width: 432px) {
+  .fa-chevron-down, .fa-chevron-up {
+    right: 2rem;
+  }
+}
 
 #btnUpIng, #btnUpApp, #btnUpUst {
   display: none;
@@ -236,6 +241,17 @@ body {
 
 .colorUst {
   background-color: #DC3545;
+}
+
+@media screen and (max-width: 432px) {
+  .btn-primary, .btn-success, .btn-danger {
+    width: 94%;
+  }
+
+  .listIng, .listApp, .listUst {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 0.7rem;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
